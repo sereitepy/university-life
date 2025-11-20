@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'University Life',
+  title: 'University Life | Cambodia',
   description:
     'A website that helps prepare high school students for university life',
 }
