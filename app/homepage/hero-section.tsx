@@ -1,29 +1,27 @@
-import Image from 'next/image'
+import { AuroraBackground } from '@/components/ui/shadcn-io/aurora-background'
+// import '/node_modules/flag-icons/css/flag-icons.min.css'
 
 const HeroSection = () => {
   return (
     <div className=''>
-      <div className='relative h-70 w-full'>
-        <Image
-          fill={true}
-          alt='group-of-students'
-          src='/hero-image.jpg'
-          className='object-cover overflow-clip transition-transform duration-300 transform hover:scale-115 peer'
-        />
-        <div className='absolute w-full h-full bg-black/20 backdrop-blur-xs flex items-center justify-center flex-col gap-3 peer-hover:opacity-100 pointer-events-none'>
-          <h1
-            className='text-4xl text-zinc-200 font-bold text-shadow-xs bg-white/40 rounded-2xl p-4 backdrop-blur-lg bg-blend-normal
+      <AuroraBackground>
+        <div className='relative flex flex-col gap-4 items-center justify-center px-4 pt-20'>
+          <div className='text-3xl text-left md:text-7xl font-bold text-neutral-300 dark:text-white text-center-10'>
+            Welcome to University Life 🥳
+          </div>
+          <div className='font-extralight text-base md:text-4xl text-neutral-200 py-4'>
+            A community that is made for upcoming/current university students in Cambodia
+            <span className='fi fi-kh'></span>
+          </div>
+          <button
+            className='active:bg-white/20 cursor-pointer hover:bg-primary hover:inset-shadow-sm transition-transform delay-250 duration-400 ease-in hover:inset-shadow-background active:shadow-2xs active:backdrop-blur-3xl bg-white/10 inset-shadow-neutral-400 inset-shadow-sm
 
-'
+ hover:text-neutral-50 font-semibold dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2'
           >
-            Welcome to University Life!
-          </h1>
-          <p className='text-xl text-zinc-50'>
-            Either you have just finished High School or is already in
-            University, you are all welcomed here!
-          </p>
+            Get your personal package
+          </button>
         </div>
-      </div>
+      </AuroraBackground>
     </div>
   )
 }
