@@ -1,31 +1,29 @@
-import Image from 'next/image'
+'use client'
+import { AuroraBackground } from '@/components/ui/shadcn-io/aurora-background'
+// import '/node_modules/flag-icons/css/flag-icons.min.css'
+import { useState } from 'react'
+import Package from '../package'
 
 const HeroSection = () => {
+  const [open, setOpen] = useState(false)
   return (
     <div className=''>
-      <div className='relative h-70 w-full'>
-        <Image
-          fill={true}
-          alt='group-of-students'
-          src='/hero-image.jpg'
-          className='object-cover overflow-clip transition-transform duration-300 transform hover:scale-115 peer'
-        />
-        <div className='absolute w-full h-full bg-black/20 backdrop-blur-xs flex items-center justify-center flex-col gap-3 peer-hover:opacity-100 pointer-events-none'>
-          <h1
-            className='text-4xl text-zinc-200 font-bold text-shadow-xs bg-white/40 rounded-2xl p-4 backdrop-blur-lg bg-blend-normal
-
-'
-          >
-            Welcome to University Life!
-          </h1>
-          <p className='text-xl text-zinc-50'>
-            Either you have just finished High School or is already in
-            University, you are all welcomed here!
-          </p>
+      <AuroraBackground>
+        <div className='relative flex flex-col gap-4 items-center justify-center px-4 pt-20'>
+          <div className='text-3xl text-left md:text-7xl font-bold text-neutral-300 dark:text-white text-center-10'>
+            Welcome to University Life 🥳
+          </div>
+          <div className='font-extralight text-base md:text-4xl text-neutral-200 py-4'>
+            A community that is made for upcoming/current university students in
+            Cambodia
+            <span className='fi fi-kh'></span>
+          </div>
+          <Package open={open} setOpen={setOpen}/>
         </div>
-      </div>
+      </AuroraBackground>
     </div>
   )
 }
+
 
 export default HeroSection
