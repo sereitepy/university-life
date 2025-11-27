@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -62,37 +62,62 @@
 
 :root {
   --radius: 0.625rem;
-  --background:  oklch(0.1418 0.0534 274.86);
-  --foreground: oklch(0.2039 0.0338 280.38);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.4206 0.1145 307.3);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.6691 0.2218 305.26);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* 🌌 Deep Space Purple Theme - Modern & Sleek */
+  
+  /* Backgrounds - Deep blacks with subtle purple tint */
+  --background: oklch(0.12 0.02 280);  /* Almost black with purple undertone */
+  --foreground: oklch(0.98 0.005 280);  /* Crisp white text */
+  
+  /* Cards & Surfaces - Elevated dark surfaces */
+  --card: oklch(0.18 0.025 280);  /* Slightly lighter than bg */
+  --card-foreground: oklch(0.98 0.005 280);  /* White text */
+  
+  /* Popovers & Dialogs */
+  --popover: oklch(0.16 0.025 280);  /* Rich dark purple-black */
+  --popover-foreground: oklch(0.98 0.005 280);  /* White text */
+  
+  /* Primary - Vibrant Electric Purple */
+  --primary: oklch(0.60 0.25 290);  /* Bright vivid purple */
+  --primary-foreground: oklch(0.98 0 0);  /* White on purple */
+  
+  /* Secondary - Cooler purple accent */
+  --secondary: oklch(0.25 0.04 280);  /* Dark purple-gray */
+  --secondary-foreground: oklch(0.95 0.01 280);  /* Light text */
+  
+  /* Muted - Subtle backgrounds */
+  --muted: oklch(0.22 0.03 280);  /* Muted dark purple */
+  --muted-foreground: oklch(0.65 0.02 280);  /* Medium gray text */
+  
+  /* Accent - Pop of color */
+  --accent: oklch(0.28 0.05 285);  /* Medium purple accent */
+  --accent-foreground: oklch(0.98 0 0);  /* White text */
+  
+  /* Destructive - Modern red */
+  --destructive: oklch(0.55 0.22 25);  /* Vibrant red */
+  --destructive-foreground: oklch(0.98 0 0);  /* White text */
+  
+  /* Borders & Inputs - Subtle purple glow */
+  --border: oklch(0.30 0.04 280);  /* Visible purple-tinted border */
+  --input: oklch(0.20 0.03 280);  /* Dark input background */
+  --ring: oklch(0.60 0.25 290);  /* Purple focus ring (matches primary) */
+  
+  /* Charts - Vibrant data viz colors */
+  --chart-1: oklch(0.65 0.24 290);  /* Purple */
+  --chart-2: oklch(0.70 0.20 320);  /* Magenta */
+  --chart-3: oklch(0.68 0.19 200);  /* Cyan */
+  --chart-4: oklch(0.75 0.18 140);  /* Green */
+  --chart-5: oklch(0.72 0.21 60);  /* Yellow */
+  
+  /* Sidebar - Slightly different from main bg */
+  --sidebar: oklch(0.14 0.02 280);  /* Deep purple-black */
+  --sidebar-foreground: oklch(0.95 0.01 280);  /* White text */
+  --sidebar-primary: oklch(0.60 0.25 290);  /* Bright purple accent */
+  --sidebar-primary-foreground: oklch(0.98 0 0);  /* White */
+  --sidebar-accent: oklch(0.24 0.04 280);  /* Hover state */
+  --sidebar-accent-foreground: oklch(0.95 0.01 280);  /* Light text */
+  --sidebar-border: oklch(0.25 0.03 280);  /* Subtle separator */
+  --sidebar-ring: oklch(0.60 0.25 290);  /* Purple focus */
 }
 
 .dark {
