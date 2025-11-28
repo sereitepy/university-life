@@ -1,12 +1,20 @@
+'use client'
+
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { ProgressDemo } from './progress'
+import { Button } from '@/components/ui/button'
+import { X } from 'lucide-react'
+import Link from 'next/link'
 
 interface Prop {
   open: boolean
@@ -26,24 +34,84 @@ const Package = ({ open, setOpen }: Prop) => {
             Get your personal package
           </button>
         </DialogTrigger>
-        {open && <PersonalPackage />}
+
+        {open && (
+          <div className=''>
+            <PersonalPackage />
+          </div>
+        )}
       </Dialog>
     </div>
   )
 }
 
 function PersonalPackage() {
+  const [currentStep, setCurrentStep] = useState(0)
+  const steps = 6
+
   return (
     <>
       <div className=''>
-        <DialogContent className='min-w-screen h-full'>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
+        <DialogContent className=' min-w-screen h-full [&>button:first-of-type]:hidden'>
+          <div className='w-240 h-140 mx-auto flex flex-col justify-between gap-10'>
+            <DialogHeader className='relative'>
+              <DialogClose className='absolute top-14 -left-100 hover:font-extrabold'>
+                <X className='hover:font-bold' fontWeight='bold' />
+              </DialogClose>
+              <div className='flex justify-center items-center'>
+                <ProgressDemo step={(currentStep / steps) * 100} />
+              </div>
+              {currentStep === 0 && (
+                <div className='flex flex-col gap-3'>
+                  <DialogTitle className='text-3xl w-8xl mx-auto'>
+                    Let&apos;s complete this personal package information to get
+                    to your most aligned university information!
+                  </DialogTitle>
+                  <DialogDescription className='text-xl'>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </DialogDescription>
+                </div>
+              )}
+            </DialogHeader>
+            <DialogFooter className='w-full h-fit'>
+              <div
+                className={`w-full flex ${
+                  currentStep === 0
+                    ? 'items-end justify-end'
+                    : 'items-center justify-between'
+                }`}
+              >
+                <Button
+                  variant='secondary'
+                  onClick={() => {
+                    if (currentStep > 0) {
+                      setCurrentStep(currentStep - 1)
+                    }
+                  }}
+                  className={currentStep !== 0 ? 'flex' : 'hidden'}
+                >
+                  Back
+                </Button>
+                <Button
+                  type={currentStep === 6 ? 'submit' : 'button'}
+                  onClick={() => {
+                    if (currentStep < 6) {
+                      setCurrentStep(currentStep + 1)
+                    }
+                  }}
+                >
+                  {currentStep === 6 ? (
+                    <p>
+                      <Link href='/result'>Confirm </Link>
+                    </p>
+                  ) : (
+                    <p>Next</p>
+                  )}
+                </Button>
+              </div>
+            </DialogFooter>
+          </div>
         </DialogContent>
       </div>
     </>

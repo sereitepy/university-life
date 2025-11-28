@@ -29,11 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <div className='bg-transparent'>
-          <div className='fixed top-0 left-0 right-0 z-50 backdrop-blur-xl shadow-lg px-10 py-5'>
+        <div className='flex flex-col min-h-screen'>
+          <div className='sticky top-0 z-50 backdrop-blur-xl shadow-lg px-10 py-5'>
             <Header />
           </div>
-          {children}
+          <main className='grow'>{children}</main>
+          <div className='sticky z-50 bottom-0'>Footer</div>
         </div>
       </body>
     </html>
