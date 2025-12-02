@@ -6,6 +6,12 @@ import Package from '../package'
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false)
+  const [data, setData] = useState({
+    name: '',
+    age: '',
+    school: '',
+    
+  })
   return (
     <div className=''>
       <AuroraBackground>
@@ -18,12 +24,11 @@ const HeroSection = () => {
             Cambodia
             <span className='fi fi-kh'></span>
           </div>
-          <Package open={open} setOpen={setOpen}/>
+          <Package open={open} setOpen={setOpen} />
         </div>
       </AuroraBackground>
     </div>
   )
 }
-
 
 export default HeroSection

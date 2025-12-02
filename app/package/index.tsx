@@ -55,7 +55,7 @@ function PersonalPackage() {
         <DialogContent className=' min-w-screen h-full [&>button:first-of-type]:hidden'>
           <div className='w-240 h-140 mx-auto flex flex-col justify-between gap-10'>
             <DialogHeader className='relative'>
-              <DialogClose className='absolute top-14 -left-100 hover:font-extrabold'>
+              <DialogClose className='absolute top-8 -left-20 hover:font-extrabold'>
                 <X className='hover:font-bold' fontWeight='bold' />
               </DialogClose>
               <div className='flex justify-center items-center'>
