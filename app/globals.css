@@ -76,7 +76,7 @@
   --card-foreground: oklch(0.98 0.005 280); /* White text */
 
   /* Popovers & Dialogs */
-  --popover: oklch(0.16 0.025 280); /* Rich dark purple-black */
+  --popover: oklch(16.624% 0.05407 304.482); /* Rich dark purple-black */
   --popover-foreground: oklch(0.98 0.005 280); /* White text */
 
   /* Primary - Vibrant Electric Purple */
@@ -103,6 +103,9 @@
   --border: oklch(0.3 0.04 280); /* Visible purple-tinted border */
   --input: oklch(0.2 0.03 280); /* Dark input background */
   --ring: oklch(0.6 0.25 290); /* Purple focus ring (matches primary) */
+  --background-input: oklch(
+    34.619% 0.07098 295.957
+  ); /* Purple focus ring (matches primary) */
 
   /* Charts - Vibrant data viz colors */
   --chart-1: oklch(0.65 0.24 290); /* Purple */
