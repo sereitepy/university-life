@@ -3,58 +3,10 @@ import { AuroraBackground } from '@/components/ui/shadcn-io/aurora-background'
 // import '/node_modules/flag-icons/css/flag-icons.min.css'
 import { useState } from 'react'
 import Package from '../package'
-import { FormData } from '../formData'
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false)
-  const [formData, setFormData] = useState<FormData>({
-    personal: {
-      age: '',
-      gender: '',
-      grade: '',
-      highschool: '',
-      family_economic: '',
-      graduation_year: undefined,
-      bacII_grade: undefined,
-      academic_performance: '',
-    },
-    career_interests: {
-      values: [],
-      willing_work_abroad: '',
-      interesting_careers: [],
-      lifestyle: [],
-      plan_after_graduation: '',
-      internship_importance: 3,
-    },
-    academic: {
-      preferred_learning_style: '',
-      hobbies: [],
-      interested_subjects: [],
-      extracurricular: [],
-      influence: [],
-    },
-    campus: {
-      study_location: '',
-      campus_importance: 3,
-      facilities_importance: {
-        clubs: 3,
-        class_sizes: 3,
-        labs: 3,
-        library: 3,
-        workshop: 3,
-        tutoring: 3,
-        canteen: 3,
-        study_room: 3,
-        cafe: 3,
-      },
-      flexible_schedule_importance: 3,
-    },
-    financial: {
-      budget: '',
-      volunteer_internship: '',
-      scholarship_need: '',
-    },
-  })
+
   return (
     <div className=''>
       <AuroraBackground>
@@ -67,12 +19,7 @@ const HeroSection = () => {
             Cambodia
             <span className='fi fi-kh'></span>
           </div>
-          <Package
-            open={open}
-            setOpen={setOpen}
-            formData={formData}
-            setFormData={setFormData}
-          />
+          <Package open={open} setOpen={setOpen} />
         </div>
       </AuroraBackground>
     </div>

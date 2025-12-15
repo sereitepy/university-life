@@ -1,13 +1,14 @@
 import { FormData } from '@/app/formData'
 import { Label } from '@/components/ui/label'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, RefObject, SetStateAction } from 'react'
 
 interface GenderProp {
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
+  gradeRef: RefObject<HTMLInputElement | null>
 }
 
-export default function Gender({ formData, setFormData }: GenderProp) {
+export default function Gender({ formData, setFormData, gradeRef }: GenderProp) {
   const gender = [
     {
       id: 'female',
@@ -22,6 +23,14 @@ export default function Gender({ formData, setFormData }: GenderProp) {
       label: 'Others',
     },
   ]
+
+  const handleConfirm = () => {
+    gradeRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
+  }
+
   return (
     <div className='flex gap-10'>
       {gender.map(item => (
@@ -39,6 +48,8 @@ export default function Gender({ formData, setFormData }: GenderProp) {
                   gender: item.id,
                 },
               })
+              handleConfirm()
+
             }}
             className='w-5 h-5 cursor-pointer'
           />

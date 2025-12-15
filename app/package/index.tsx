@@ -3,16 +3,14 @@
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Dispatch, SetStateAction } from 'react'
 import Survey from './survey'
-import { FormData } from '../formData'
 
 interface Prop {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
-  formData: FormData
-  setFormData: Dispatch<SetStateAction<FormData>>
+
 }
 
-const Package = ({ open, setOpen, formData, setFormData }: Prop) => {
+const Package = ({ open, setOpen}: Prop) => {
   return (
     <div className=''>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -28,7 +26,7 @@ const Package = ({ open, setOpen, formData, setFormData }: Prop) => {
 
         {open && (
           <div className=''>
-            <Survey formData={formData} setFormData={setFormData} />
+            <Survey />
           </div>
         )}
       </Dialog>
