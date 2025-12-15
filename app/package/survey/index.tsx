@@ -1,28 +1,32 @@
+import { FormData } from '@/app/formData'
 import { Button } from '@/components/ui/button'
 import {
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle
+  DialogHeader
 } from '@/components/ui/dialog'
 import { X } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { ProgressDemo } from '../progress'
-import StepZero from './step-zero'
 import StepOne from './step-one'
+import StepZero from './step-zero'
 
-export default function Survey() {
+interface SurveyProp {
+  formData: FormData
+  setFormData: Dispatch<SetStateAction<FormData>>
+}
+
+export default function Survey({ formData, setFormData }: SurveyProp) {
   const [currentStep, setCurrentStep] = useState(0)
   const steps = 6
 
   return (
     <>
       <div className=''>
-        <DialogContent className=' min-w-screen h-full [&>button:first-of-type]:hidden'>
-          <div className='w-240 h-140 mx-auto flex flex-col justify-between gap-10'>
+        <DialogContent className='min-w-screen h-full [&>button:first-of-type]:hidden overflow-y-auto scroll-smooth'>
+          <div className='w-240 h-auto mx-auto flex flex-col justify-between gap-10'>
             <DialogHeader className='relative'>
               <DialogClose className='absolute top-8 -left-20 hover:font-extrabold'>
                 <X className='hover:font-bold' fontWeight='bold' />
@@ -30,7 +34,9 @@ export default function Survey() {
               <div className='flex justify-center items-center'>
                 <ProgressDemo step={(currentStep / steps) * 100} />
               </div>
-              {currentStep === 0 && <StepZero />}
+              {currentStep === 0 && (
+                <StepZero formData={formData} setFormData={setFormData} />
+              )}
               {currentStep === 1 && <StepOne />}
             </DialogHeader>
             <DialogFooter className='w-full h-fit'>
