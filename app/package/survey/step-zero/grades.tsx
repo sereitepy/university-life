@@ -1,9 +1,6 @@
 'use client'
 
-import * as React from 'react'
-import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
+import { FormData } from '@/app/formData'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -18,6 +15,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
+import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 const frameworks = [
   {
@@ -42,9 +42,14 @@ const frameworks = [
   },
 ]
 
-export function Grades() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState('')
+interface GradeProp {
+  formData: FormData
+  setFormData: Dispatch<SetStateAction<FormData>>
+}
+
+export function Grades({ formData, setFormData }: GradeProp) {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -72,7 +77,14 @@ export function Grades() {
                   key={framework.value}
                   value={framework.value}
                   onSelect={currentValue => {
-                    setValue(currentValue === value ? '' : currentValue)
+                    setValue(currentValue)
+                    setFormData({
+                      ...formData,
+                      personal: {
+                        ...formData.personal,
+                        grade: value,
+                      },
+                    })
                     setOpen(false)
                   }}
                 >

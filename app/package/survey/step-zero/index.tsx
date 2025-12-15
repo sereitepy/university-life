@@ -1,115 +1,67 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import { FormData } from '@/app/formData'
 import { DialogDescription, DialogTitle } from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { ArrowLeftIcon, ArrowRightIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
+import Age from './age'
+import Gender from './gender'
 import { Grades } from './grades'
 
-enum Gender {
-  female,
-  male,
-  others,
+interface StepOneProp {
+  formData: FormData
+  setFormData: Dispatch<SetStateAction<FormData>>
 }
-export default function StepZero() {
-  const [age, setAge] = useState(18)
-  const [gender, setGender] = useState('')
-  const minAge = 13
-  const maxAge = 60
+
+export default function StepZero({ formData, setFormData }: StepOneProp) {
+  const gradeRef = useRef<HTMLInputElement | null>(null)
   return (
-    <div className='flex flex-col gap-8'>
-      <section className='flex flex-col gap-4 items-center justify-center'>
-        <DialogTitle className='text-3xl'>Who You Are. 👩🧑</DialogTitle>
-        <DialogDescription className='text-xl'>
+    <div className='flex flex-col gap-5 transition-all duration-300 ease-in-out'>
+      <section className='flex flex-col gap-4 items-baseline justify-baseline'>
+        <DialogTitle className='text-2xl'>Personal</DialogTitle>
+        <DialogDescription className='text-lg'>
           This entire process is anonymous! We won&apos;t know who you are. This
           section helps improve our recommendation system for your university
           choice only.
         </DialogDescription>
       </section>
-      <Separator />
-      {/* Age | Gender | Grade */}
-      <section className='flex items-baseline justify-baseline gap-[15%]'>
+
+      <Separator className='mb-5' />
+
+      <section className='flex flex-col items-center justify-center gap-20 overflow-y-auto scroll-smooth'>
         {/* Age */}
-        <section className='flex flex-col justify-center items-center gap-3'>
-          <h1 className='font-bold text-lg'>Your Age</h1>
-          <div className='flex gap-5 transition-all duration-200 ease-in-out'>
-            <Button
-              className='p-1 bg-primary/20 border border-primary/50'
-              size='icon-sm'
-              onClick={() => {
-                if (age >= minAge) {
-                  setAge(age - 1)
-                }
-              }}
-            >
-              <ArrowLeftIcon size={20} weight='bold' />
-            </Button>
-            {/* Age */}
-            <div className='text-2xl font-semibold w-10 flex items-center justify-center'>
-              {age}
-            </div>
-            <Button
-              className='p-1 bg-primary/20 border border-primary/50'
-              size='icon-sm'
-              onClick={() => {
-                if (age < maxAge) {
-                  setAge(age + 1)
-                }
-              }}
-            >
-              <ArrowRightIcon size={20} weight='bold' />
-            </Button>
-          </div>
+        <section
+          className={`relative flex flex-col justify-center items-center gap-5 
+            ${formData.personal.age && 'opacity-50 scale-85'}`}
+        >
+          <h1 className='font-bold text-4xl w-fit mx-auto'>Your Age</h1>
+          <Age formData={formData} setFormData={setFormData} />
         </section>
+
         {/* Gender */}
-        <section className='flex flex-col justify-baseline items-baseline gap-3'>
-          <h1 className='font-bold text-lg'>Gender</h1>
-          <div className='flex flex-col gap-1.5'>
-            <div className='flex gap-3 items-center'>
-              <Checkbox
-                id='female'
-                onCheckedChange={() => {
-                  setGender('female')
-                }}
-              />
-              <Label htmlFor='female' className='text-md'>
-                Female
-              </Label>
-            </div>
-            <div className='flex gap-3 items-center'>
-              <Checkbox
-                id='male'
-                onCheckedChange={() => {
-                  setGender('male')
-                }}
-                // checked={gender}
-              />
-              <Label htmlFor='male' className='text-md'>
-                Male
-              </Label>
-            </div>
-            <div className='flex gap-3 items-center'>
-              <Checkbox
-                id='others-gender'
-                onCheckedChange={() => {
-                  setGender('others-gender')
-                }}
-                value={gender}
-              />
-              <Label htmlFor='others-gender' className='text-md'>
-                Others
-              </Label>
-            </div>
-          </div>
+        <section
+          id='gender-section'
+          className={`flex flex-col justify-center items-center gap-5 
+            ${!formData.personal.age && 'opacity-50 scale-85'}
+            ${formData.personal.gender && 'opacity-50 scale-85'}`}
+        >
+          <h1 className='font-bold text-4xl'>Gender</h1>
+          <Gender
+            formData={formData}
+            setFormData={setFormData}
+            gradeRef={gradeRef}
+          />
         </section>
 
         {/* Grade */}
-        <section className='flex flex-col justify-baseline items-baseline gap-3'>
-          <h1 className='font-bold text-lg'>Current Grade/Level</h1>
-          <Grades />
+        <section
+          ref={gradeRef}
+          id='grade-section'
+          className={`flex flex-col justify-center items-center gap-5 
+            ${!formData.personal.gender && 'opacity-50 scale-85'}`}
+        >
+          <h1 className='font-bold text-4xl'>Current Grade/Level</h1>
+          <Grades formData={formData} setFormData={setFormData} />
         </section>
       </section>
     </div>

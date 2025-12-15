@@ -4,22 +4,13 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Dispatch, SetStateAction } from 'react'
 import Survey from './survey'
 
-interface Data {
-  name: string
-  age: string
-  province: string
-  district: string
-  school: string
-}
-
 interface Prop {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
-  data: Data
-  setData: Dispatch<SetStateAction<Data>>
+
 }
 
-const Package = ({ open, setOpen, data, setData }: Prop) => {
+const Package = ({ open, setOpen}: Prop) => {
   return (
     <div className=''>
       <Dialog open={open} onOpenChange={setOpen}>
