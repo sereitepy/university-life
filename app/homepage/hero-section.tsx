@@ -6,13 +6,7 @@ import Package from '../package'
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false)
-  const [data, setData] = useState({
-    name: '',
-    age: '',
-    province: '',
-    district: '',
-    school: '',
-  })
+
   return (
     <div className=''>
       <AuroraBackground>
@@ -25,12 +19,7 @@ const HeroSection = () => {
             Cambodia
             <span className='fi fi-kh'></span>
           </div>
-          <Package
-            open={open}
-            setOpen={setOpen}
-            data={data}
-            setData={setData}
-          />
+          <Package open={open} setOpen={setOpen} />
         </div>
       </AuroraBackground>
     </div>
