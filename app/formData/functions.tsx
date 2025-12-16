@@ -6,3 +6,10 @@ export const handleConfirm = (ref: RefObject<HTMLInputElement | null>) => {
     block: 'center',
   })
 }
+
+export const scrollToElement = (ref: RefObject<HTMLElement | null>) => {
+  ref.current?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}

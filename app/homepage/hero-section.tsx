@@ -10,14 +10,16 @@ const HeroSection = () => {
   return (
     <div className=''>
       <AuroraBackground>
-        <div className='relative flex flex-col gap-4 items-center justify-center px-4 pt-5'>
-          <div className='text-3xl text-left md:text-5xl lg:text-6xl font-bold text-neutral-300 dark:text-white text-center-10'>
-            Welcome to University Life 🥳
-          </div>
-          <div className='font-extralight text-base md:text-3xl 2xl:text-4xl text-neutral-200 py-4'>
-            A community that is made for upcoming/current university students in
-            Cambodia
-            <span className='fi fi-kh'></span>
+        <div className='relative flex flex-col gap-7 items-center justify-center px-4 pt-5'>
+          <div className='flex flex-col gap-2 items-center justify-center'>
+            <div className='text-3xl text-left md:text-5xl lg:text-6xl font-bold text-neutral-300 dark:text-white text-center-10'>
+              Welcome to Sakol Life 🥳
+            </div>
+            <div className='font-extralight text-base md:text-3xl 2xl:text-4xl text-neutral-200 py-4'>
+              A community that is made for upcoming/current university students
+              in Cambodia
+              <span className='fi fi-kh'></span>
+            </div>
           </div>
           <Package open={open} setOpen={setOpen} />
         </div>

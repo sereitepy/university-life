@@ -11,7 +11,7 @@ interface AgeProp {
 }
 
 export default function Age({ formData, setFormData, genderRef }: AgeProp) {
-  const [age, setAge] = useState('18')
+  const [age, setAge] = useState(formData.personal.age || '18')
   const minAge = 13
   const maxAge = 60
   const minus = parseInt(age) - 1

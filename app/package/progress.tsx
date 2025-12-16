@@ -6,5 +6,5 @@ interface Props {
   step: number
 }
 export function ProgressDemo({ step }: Props) {
-  return <Progress value={step} className='w-full my-10' />
+  return <Progress value={step} className='w-full my-5' />
 }
