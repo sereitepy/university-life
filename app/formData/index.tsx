@@ -1,4 +1,5 @@
 export interface FormData {
+  student_status: string
   personal: {
     age: string
     gender: string

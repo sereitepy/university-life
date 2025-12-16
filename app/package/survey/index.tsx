@@ -1,4 +1,5 @@
 import { FormData } from '@/app/formData'
+import { scrollToElement } from '@/app/formData/functions'
 import { Button } from '@/components/ui/button'
 import {
   DialogClose,
@@ -8,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { X } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ProgressDemo } from '../progress'
 import StepOne from './step-one'
 import StepZero from './step-zero'
@@ -17,6 +18,7 @@ export default function Survey() {
   const [currentStep, setCurrentStep] = useState(0)
   const steps = 6
   const [formData, setFormData] = useState<FormData>({
+    student_status: '',
     personal: {
       age: '',
       gender: '',
@@ -64,6 +66,10 @@ export default function Survey() {
     },
   })
 
+  const progressStepperRef = useRef<HTMLInputElement | null>(null)
+
+  const stepZeroCompletion = formData.student_status
+
   const stepOneCompletion =
     formData.personal.age &&
     formData.personal.gender &&
@@ -73,26 +79,39 @@ export default function Survey() {
     formData.personal.bacII_grade &&
     formData.personal.academic_performance
 
+  const handleDisable = () => {
+    if (currentStep === 0 && !stepZeroCompletion) {
+      return true
+    } else if (currentStep === 1 && !stepOneCompletion) {
+      return true
+    }
+  }
+
   return (
     <>
       <div className=''>
         <DialogContent className='min-w-screen rounded-none border-0 h-full [&>button:first-of-type]:hidden overflow-y-auto scroll-smooth'>
-          <div className='w-240 h-auto mx-auto flex flex-col justify-between gap-10'>
+          <div
+            ref={progressStepperRef}
+            className='w-240 h-auto mx-auto flex flex-col justify-between gap-10'
+          >
             <DialogHeader className='relative'>
-              <DialogClose className='absolute top-8 -left-20 hover:font-extrabold'>
+              <DialogClose className='absolute top-3 -left-20 hover:font-extrabold'>
                 <X className='hover:font-bold' fontWeight='bold' />
               </DialogClose>
-              <div className='flex justify-center items-center'>
+              <div className='flex justify-center items-center pb-5'>
                 <ProgressDemo step={(currentStep / steps) * 100} />
               </div>
               <div className=''>
                 {currentStep === 0 && (
                   <StepZero formData={formData} setFormData={setFormData} />
                 )}
-                {currentStep === 1 && <StepOne />}
+                {currentStep === 1 && (
+                  <StepOne formData={formData} setFormData={setFormData} />
+                )}
               </div>
             </DialogHeader>
-            <DialogFooter className='w-full h-fit mb-10'>
+            <DialogFooter className='w-full h-fit m-10'>
               <div
                 className={`w-full flex ${
                   currentStep === 0
@@ -104,6 +123,7 @@ export default function Survey() {
                   variant='secondary'
                   onClick={() => {
                     if (currentStep > 0) {
+                      scrollToElement(progressStepperRef)
                       setCurrentStep(currentStep - 1)
                     }
                   }}
@@ -112,13 +132,12 @@ export default function Survey() {
                   Back
                 </Button>
                 <Button
-                  disabled={currentStep === 0 && !stepOneCompletion}
-                  className={`${
-                    !stepOneCompletion ? 'cursor-not-allowed' : 'cursor-pointer'
-                  }`}
+                  disabled={handleDisable()}
+                  className={``}
                   type={currentStep === 6 ? 'submit' : 'button'}
                   onClick={() => {
                     if (currentStep < 6) {
+                      scrollToElement(progressStepperRef)
                       setCurrentStep(currentStep + 1)
                     }
                   }}
