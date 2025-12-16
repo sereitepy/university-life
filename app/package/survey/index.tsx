@@ -22,9 +22,8 @@ export default function Survey() {
       gender: '',
       grade: '',
       highschool: '',
-      family_economic: '',
       graduation_year: undefined,
-      bacII_grade: undefined,
+      bacII_grade: '',
       academic_performance: '',
     },
     career_interests: {
@@ -65,6 +64,15 @@ export default function Survey() {
     },
   })
 
+  const stepOneCompletion =
+    formData.personal.age &&
+    formData.personal.gender &&
+    formData.personal.grade &&
+    formData.personal.highschool &&
+    formData.personal.graduation_year &&
+    formData.personal.bacII_grade &&
+    formData.personal.academic_performance
+
   return (
     <>
       <div className=''>
@@ -104,6 +112,10 @@ export default function Survey() {
                   Back
                 </Button>
                 <Button
+                  disabled={currentStep === 0 && !stepOneCompletion}
+                  className={`${
+                    !stepOneCompletion ? 'cursor-not-allowed' : 'cursor-pointer'
+                  }`}
                   type={currentStep === 6 ? 'submit' : 'button'}
                   onClick={() => {
                     if (currentStep < 6) {
