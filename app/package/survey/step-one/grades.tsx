@@ -1,6 +1,7 @@
 'use client'
 
 import { FormData } from '@/app/formData'
+import { handleConfirm } from '@/app/formData/functions'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -17,7 +18,7 @@ import {
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, RefObject, SetStateAction, useState } from 'react'
 
 const frameworks = [
   {
@@ -45,20 +46,21 @@ const frameworks = [
 interface GradeProp {
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
+  highschoolRef: RefObject<HTMLInputElement | null>
 }
 
-export function Grades({ formData, setFormData }: GradeProp) {
+export function Grades({ formData, setFormData, highschoolRef }: GradeProp) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(formData.personal.grade || '')
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild disabled={!formData.personal.gender}>
         <Button
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-[200px] justify-between font-medium'
+          className='w-full justify-between font-medium'
         >
           {value
             ? frameworks.find(framework => framework.value === value)?.label
@@ -66,7 +68,7 @@ export function Grades({ formData, setFormData }: GradeProp) {
           <ChevronsUpDownIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-[200px] p-0'>
+      <PopoverContent className='w-full p-0'>
         <Command>
           <CommandInput placeholder='Search grade...' />
           <CommandList>
@@ -82,10 +84,11 @@ export function Grades({ formData, setFormData }: GradeProp) {
                       ...formData,
                       personal: {
                         ...formData.personal,
-                        grade: value,
+                        grade: currentValue,
                       },
                     })
                     setOpen(false)
+                    handleConfirm(highschoolRef)
                   }}
                 >
                   <CheckIcon

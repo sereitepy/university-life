@@ -1,12 +1,12 @@
 export interface FormData {
+  student_status: string
   personal: {
     age: string
     gender: string
     grade: string
     highschool: string
-    family_economic: string
     graduation_year?: string
-    bacII_grade?: string
+    bacII_grade: string
     academic_performance: string
   }
   career_interests: {

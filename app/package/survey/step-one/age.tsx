@@ -1,20 +1,23 @@
+import { FormData } from '@/app/formData'
+import { handleConfirm } from '@/app/formData/functions'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftIcon, ArrowRightIcon } from '@phosphor-icons/react'
-import { Dispatch, SetStateAction, useState } from 'react'
-import { FormData } from '@/app/formData'
-import Link from 'next/link'
+import { Dispatch, RefObject, SetStateAction, useState } from 'react'
 
 interface AgeProp {
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
+  genderRef: RefObject<HTMLInputElement | null>
 }
 
-export default function Age({ formData, setFormData }: AgeProp) {
-  const [age, setAge] = useState('')
+export default function Age({ formData, setFormData, genderRef }: AgeProp) {
+  const [age, setAge] = useState(formData.personal.age || '18')
   const minAge = 13
   const maxAge = 60
   const minus = parseInt(age) - 1
   const plus = parseInt(age) + 1
+
+
   return (
     <div className='relative flex gap-5 items-center transition-all duration-200 ease-in-out'>
       <Button
@@ -76,9 +79,10 @@ export default function Age({ formData, setFormData }: AgeProp) {
               age: age,
             },
           })
+          handleConfirm(genderRef)
         }}
       >
-        <Link href='#gender-section'>Confirm</Link>
+        Confirm
       </Button>
     </div>
   )
