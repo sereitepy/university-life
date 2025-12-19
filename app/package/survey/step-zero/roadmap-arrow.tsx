@@ -1,4 +1,6 @@
-import React from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 import {
   BookOpen,
   BriefcaseBusiness,
@@ -6,8 +8,15 @@ import {
   School,
   UserRound,
 } from 'lucide-react'
+import { useRef } from 'react'
 
-const RoadmapArrow = () => {
+gsap.registerPlugin(useGSAP, SplitText)
+
+interface RoadmapArrowProps {
+  animationDelay?: number
+}
+
+const RoadmapArrow = ({ animationDelay }: RoadmapArrowProps) => {
   const steps = [
     {
       icon: UserRound,
@@ -36,34 +45,65 @@ const RoadmapArrow = () => {
     },
   ]
 
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  useGSAP(
+    () => {
+      gsap.set('.roadmap-card', { autoAlpha: 0, x: 50 })
+      gsap.set('.connecting-line', { opacity: 0 })
+
+      requestAnimationFrame(() => {
+        const tl = gsap.timeline({ delay: animationDelay })
+
+        tl.to('.roadmap-card', {
+          x: 0,
+          autoAlpha: 1,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'power2.out',
+          clearProps: 'transform',
+        }).to(
+          '.connecting-line',
+          {
+            opacity: 1,
+            duration: 1,
+          },
+          '+=0.5'
+        )
+      })
+    },
+    { scope: containerRef }
+  )
+
   return (
     <div className='py-12 flex items-center justify-center'>
       <div className='w-full'>
-        <h1 className='text-2xl font-bold text-white text-center mb-10'>
+        <h1 className='split text-2xl font-bold text-white text-center mb-10'>
           Package Roadmap
         </h1>
 
-        <div className='relative'>
+        <div ref={containerRef} className='relative'>
           {/* Connecting line */}
           <div
-            className='absolute top-17 left-0 right-0 h-1 bg-linear-to-r from-purple-500 via-purple-400 to-pink-500 z-0'
+            className='connecting-line absolute top-17 left-0 right-0 h-1 bg-linear-to-r from-purple-500 via-purple-400 to-pink-500 -z-10'
             style={{
               boxShadow:
                 '0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3)',
             }}
           />
 
-          <div className='grid grid-cols-5 gap-10 relative z-10'>
+          <div className='grid grid-cols-5 gap-10 relative'>
             {steps.map((step, index) => {
               const Icon = step.icon
               return (
                 <div
                   key={index}
-                  className='relative bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 items-center justify-center flex flex-col'
+                  className='roadmap-card relative bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/20 hover:border-purple-400/50  hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 items-center justify-center flex flex-col
+                  '
                   style={{
                     boxShadow:
                       '0 8px 32px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-                    transform: 'perspective(1000px) rotateX(2deg)',
+                    // transform: 'perspective(1000px) rotateX(2deg)',
                   }}
                 >
                   {/* Step Number */}
