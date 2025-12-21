@@ -13,6 +13,7 @@ import { useRef, useState } from 'react'
 import { ProgressDemo } from '../progress'
 import StepOne from './step-one'
 import StepZero from './step-zero'
+import StepTwo from './step-two'
 
 export default function Survey() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -109,6 +110,9 @@ export default function Survey() {
                 {currentStep === 1 && (
                   <StepOne formData={formData} setFormData={setFormData} />
                 )}
+                {currentStep === 2 && (
+                  <StepTwo formData={formData} setFormData={setFormData} />
+                )}
               </div>
             </DialogHeader>
             <DialogFooter className='w-full h-fit m-10'>
@@ -132,7 +136,7 @@ export default function Survey() {
                   Back
                 </Button>
                 <Button
-                  disabled={handleDisable()}
+                  // disabled={handleDisable()}
                   className={``}
                   type={currentStep === 6 ? 'submit' : 'button'}
                   onClick={() => {
