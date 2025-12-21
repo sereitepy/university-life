@@ -17,7 +17,6 @@ export default function StudentStatus({
       id: 'highschool-student',
       value: 'Highschool Student',
     },
-
     {
       id: 'recent-highschool-graduate',
       value: 'Recent Highschool Graduate',
@@ -50,7 +49,7 @@ export default function StudentStatus({
             className={`p-8 ${
               userStatus === item.id
                 ? 'border-2 border-lime-400 bg-lime-700 hover:bg-lime-800'
-                : 'bg-primary/20 border border-white/20 hover:bg-primary/30'
+                : 'bg-primary/20 border-2 border-white/20 hover:bg-primary/30'
             }`}
             style={{
               boxShadow:

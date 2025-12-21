@@ -98,7 +98,7 @@ const RoadmapArrow = ({ animationDelay }: RoadmapArrowProps) => {
               return (
                 <div
                   key={index}
-                  className='roadmap-card relative bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/20 hover:border-purple-400/50  hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 items-center justify-center flex flex-col
+                  className='roadmap-card relative bg-linear-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/20 hover:border-purple-400/50 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 items-center justify-center flex flex-col
                   '
                   style={{
                     boxShadow:
