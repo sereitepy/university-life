@@ -42,9 +42,12 @@ export default function Values({
 
   const handleValues = (id: string) => {
     const currentValues = values || []
+    console.log(currentValues)
+
     const newValues = currentValues.includes(id)
       ? currentValues.filter(value => value !== id)
       : [...currentValues, id]
+
     setValues(newValues)
   }
 
@@ -58,6 +61,15 @@ export default function Values({
     })
   }
 
+  const checkForDifference = () => {
+    const career_valueLength = career_values.length
+    const valueLength = values.length
+
+    // if (career_valueLength === valueLength) {
+    //   const form
+    // }
+  }
+
   return (
     <div>
       <section className='flex flex-col gap-10 items-center justify-center'>
@@ -66,7 +78,6 @@ export default function Values({
             <div key={item.id}>
               <Button
                 onClick={() => handleValues(item.id)}
-                // variant='ghost'
                 className={`p-8 ${
                   values.includes(item.id)
                     ? 'border-2 border-lime-400 bg-lime-700 hover:bg-lime-800'
@@ -83,13 +94,17 @@ export default function Values({
             </div>
           ))}
         </div>
-        {career_values}
+        <div>Career Values:{career_values.length}</div>
+        <div>
+          Values:
+          {values.length}
+        </div>
         <Button
           variant='ghost'
           size='icon-sm'
           className={`w-fit px-2 text-xs 
                 ${values.length < 1 ? 'hidden' : 'block'}
-                ${values.length !== career_values.length ? 'hidden' : 'block'}
+                ${values.length !== career_values.length ? 'block' : 'hidden'}
                 ${career_values.length > 0 ? 'border border-green-400' : ''}
                 ${career_values.length > 0 ? 'hidden' : 'block'}
                 `}
