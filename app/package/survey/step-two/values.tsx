@@ -6,16 +6,19 @@ import { handleConfirm } from '@/app/formData/functions'
 interface ValuesProp {
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
-  valueRef: RefObject<HTMLInputElement | null>
+  interestingRef: RefObject<HTMLInputElement | null>
 }
 
 export default function Values({
   formData,
   setFormData,
-  valueRef,
+  interestingRef,
 }: ValuesProp) {
   const [values, setValues] = useState(formData.career_interests.values || [])
   const career_values = formData.career_interests.values
+  const changes =
+    career_values.length !== values.length ||
+    !career_values.every(item => values.includes(item))
 
   const value_options = [
     {
@@ -59,15 +62,7 @@ export default function Values({
         values: values,
       },
     })
-  }
-
-  const checkForDifference = () => {
-    const career_valueLength = career_values.length
-    const valueLength = values.length
-
-    // if (career_valueLength === valueLength) {
-    //   const form
-    // }
+    handleConfirm(interestingRef)
   }
 
   return (
@@ -94,20 +89,12 @@ export default function Values({
             </div>
           ))}
         </div>
-        <div>Career Values:{career_values.length}</div>
-        <div>
-          Values:
-          {values.length}
-        </div>
         <Button
           variant='ghost'
           size='icon-sm'
           className={`w-fit px-2 text-xs 
-                ${values.length < 1 ? 'hidden' : 'block'}
-                ${values.length !== career_values.length ? 'block' : 'hidden'}
-                ${career_values.length > 0 ? 'border border-green-400' : ''}
-                ${career_values.length > 0 ? 'hidden' : 'block'}
-                `}
+                  ${values.length > 0 && changes ? 'flex' : 'hidden'}
+          `}
           onClick={() => handleConfirmValue()}
         >
           Confirm
