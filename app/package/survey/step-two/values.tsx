@@ -6,16 +6,19 @@ import { handleConfirm } from '@/app/formData/functions'
 interface ValuesProp {
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
-  valueRef: RefObject<HTMLInputElement | null>
+  interestingRef: RefObject<HTMLInputElement | null>
 }
 
 export default function Values({
   formData,
   setFormData,
-  valueRef,
+  interestingRef,
 }: ValuesProp) {
   const [values, setValues] = useState(formData.career_interests.values || [])
   const career_values = formData.career_interests.values
+  const changes =
+    career_values.length !== values.length ||
+    !career_values.every(item => values.includes(item))
 
   const value_options = [
     {
@@ -42,9 +45,12 @@ export default function Values({
 
   const handleValues = (id: string) => {
     const currentValues = values || []
+    console.log(currentValues)
+
     const newValues = currentValues.includes(id)
       ? currentValues.filter(value => value !== id)
       : [...currentValues, id]
+
     setValues(newValues)
   }
 
@@ -56,6 +62,7 @@ export default function Values({
         values: values,
       },
     })
+    handleConfirm(interestingRef)
   }
 
   return (
@@ -66,7 +73,6 @@ export default function Values({
             <div key={item.id}>
               <Button
                 onClick={() => handleValues(item.id)}
-                // variant='ghost'
                 className={`p-8 ${
                   values.includes(item.id)
                     ? 'border-2 border-lime-400 bg-lime-700 hover:bg-lime-800'
@@ -83,16 +89,12 @@ export default function Values({
             </div>
           ))}
         </div>
-        {career_values}
         <Button
           variant='ghost'
           size='icon-sm'
           className={`w-fit px-2 text-xs 
-                ${values.length < 1 ? 'hidden' : 'block'}
-                ${values.length !== career_values.length ? 'hidden' : 'block'}
-                ${career_values.length > 0 ? 'border border-green-400' : ''}
-                ${career_values.length > 0 ? 'hidden' : 'block'}
-                `}
+                  ${values.length > 0 && changes ? 'flex' : 'hidden'}
+          `}
           onClick={() => handleConfirmValue()}
         >
           Confirm
