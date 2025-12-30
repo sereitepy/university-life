@@ -93,7 +93,7 @@ export default function LifeStyle({
                   alt={item.value}
                   width={200}
                   height={140}
-                  className='w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity'
+                  className='w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity ease-in-out'
                 />
                 <div
                   className={`absolute inset-0 bg-linear-to-br ${item.bgColor}`}
@@ -116,16 +116,8 @@ export default function LifeStyle({
                   ✓
                 </div>
               )}
-
-              {/* Hover overlay */}
-              <div className='absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors' />
             </div>
           ))}
-        </div>
-
-        <div className='flex gap-4 text-sm text-white/70'>
-          <div>Confirmed Lifestyles: {career_lifestyle.length}</div>
-          <div>Selected: {lifestyles.length}</div>
         </div>
 
         <Button

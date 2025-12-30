@@ -116,7 +116,7 @@ export default function Survey() {
               </div>
             </DialogHeader>
           </div>
-          <DialogFooter className='w-full items-center justify-center h-fit my-10 sticky bottom-1 -translate-y-1/2'>
+          <DialogFooter className='w-full items-center justify-center h-fit my-10'>
             <div
               className={`w-280 mx-auto flex ${
                 currentStep === 0

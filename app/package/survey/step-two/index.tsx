@@ -20,7 +20,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProp) {
   const career_lifestyle = formData.career_interests.lifestyle
 
   return (
-    <div className='flex flex-col gap-5 transition-all duration-300 ease-in-out'>
+    <div className='flex flex-col gap-5 transition-all duration-300 ease-in-out overflow-visible'>
       <section className='flex flex-col gap-4 items-baseline justify-baseline'>
         <DialogTitle className='text-2xl'>
           2.&nbsp;&nbsp;Career Interests
@@ -33,7 +33,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProp) {
       </section>
 
       <Separator className='mb-5' />
-      <section className='flex flex-col items-center justify-center gap-20 overflow-y-auto scroll-smooth pb-15'>
+      <section className='flex flex-col items-center justify-center gap-30 overflow-y-auto scroll-smooth'>
         {/* Value */}
         <section
           className={`relative flex flex-col justify-center items-center gap-8 transition-all duration-300 ease-in-out
@@ -52,7 +52,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProp) {
         </section>
         {/* Interesting Careers */}
         <section
-          className={`relative flex flex-col justify-center items-center gap-8 transition-all duration-300 ease-in-out
+          className={`relative flex w-full flex-col justify-center items-center scale-95 gap-8 transition-all duration-300 ease-in-out
                     ${
                       !career_values.length &&
                       'opacity-50 cursor-not-allowed scale-90'
@@ -61,19 +61,21 @@ export default function StepTwo({ formData, setFormData }: StepTwoProp) {
                     `}
         >
           <h1 className='font-bold text-4xl w-fit mx-auto pb-5'>
-            Which career industries seem interesting to you?
+            Which career industry seems most interesting to you?
           </h1>
           <InterestingCareers
             formData={formData}
             setFormData={setFormData}
             lifestyleRef={lifestyleRef}
           />
-          <span ref={interestingRef} className='absolute top-45 right-0'></span>
+          <span ref={interestingRef} className='absolute top-45 right-0'>
+            yo
+          </span>
         </section>
         {/* Lifestyle */}
         <section
           ref={lifestyleRef}
-          className={`relative flex flex-col justify-center items-center gap-8 transition-all duration-300 ease-in-out
+          className={`relative flex flex-col w-full justify-center items-center scale-95 gap-8 transition-all duration-300 ease-in-out
                     ${
                       !career_interestings.length &&
                       'opacity-50 cursor-not-allowed scale-90'
